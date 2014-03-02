@@ -1,0 +1,40 @@
+<?php
+namespace Tkgl\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
+
+/**
+ * Link company and contact details
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="company", options={"comment" = "Store company description"})
+ * @ORM\HasLifecycleCallbacks
+ * 
+ * @author Tiko Banyini <admin@tkbean.co.za>
+ */
+class CompanyContactDetail extends BaseAuditableEntity {
+
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected $id;
+
+  
+    /**
+   * @ORM\OneToOne(targetEntity="Tkgl\UserBundle\Entity\ContactDetail", orphanRemoval=true, cascade={"persist", "remove"})
+   * @ORM\JoinColumn(name="contactDetailId", referencedColumnName="id")
+   */
+  protected $contactDetail;
+  
+  
+    /**
+   * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Company", inversedBy="contactDetails")
+   * @ORM\JoinColumn(name="companyId", referencedColumnName="id")
+   */
+  protected $company; 
+    
+  
+}

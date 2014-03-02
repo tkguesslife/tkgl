@@ -1,0 +1,7 @@
+parameters:
+#    tkgl_user.example.class: Tkgl\UserBundle\Example
+
+services:
+#    tkgl_user.example:
+#        class: %tkgl_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

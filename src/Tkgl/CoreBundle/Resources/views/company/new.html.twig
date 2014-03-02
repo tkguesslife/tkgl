@@ -1,0 +1,8 @@
+<h4>Add company</h4>
+<form action="{{path('company_new')}}" method="POST" {{ form_enctype(companyForm) }}  role="form">
+
+    {{form(companyForm)}}
+    <div class="pull-right">
+    <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>

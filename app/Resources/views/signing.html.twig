@@ -1,0 +1,35 @@
+!<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>TKGL {% block title %}{% endblock %}</title>
+        <meta name="author" content="Tiko Banyini">
+        <meta name="description" content="Private company business information.">
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/signin.css') }}" rel="stylesheet">
+        <!-- Bootstrap theme -->
+        <link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="../../assets/js/html5shiv.js"></script>
+          <script src="../../assets/js/respond.min.js"></script>
+        <![endif]-->
+
+
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+{% block body %}
+
+
+{% endblock %}
+
+    </body>
+</html>
