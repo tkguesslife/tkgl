@@ -1,0 +1,63 @@
+{% extends "::base.html.twig" %}
+ {% block body %}
+
+<div class="col-lg-4">
+    <h4>System users  | <a href="{{path('user_new')}}" title="Add new user" class="ajaxLink"> Add</a></h4>
+    {{ include(
+    'TkglUserBundle:user:_list.html.twig',
+    { 'users': users }
+) }}
+    
+</div>
+<div id="divTopMiddle" class="col-lg-5">    
+
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        $(".ajaxLink").live('click', function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: this.href,
+                data: {},
+                success: function(data) {
+                    $("#divTopMiddle").html(data);
+                }
+            });
+        });
+        
+               var submittedForm = null;
+        $('form').live('submit', function(e) {
+            e.preventDefault();
+            submittedForm = $(this);
+            postForm(submittedForm, function(response) {
+                if (response.success) {
+                    alert('done');
+                }
+            });
+        });
+
+
+
+    });
+
+    function postForm($form, callback) {
+        // Get all form values    
+        var values = $form.serialize();
+
+        // Throw the form values to the server!    
+        $.ajax({
+            type: $form.attr('method'),
+            url: $form.attr('action'),
+            data: values,
+            success: function(data) {
+                callback(data);
+            }
+        });
+    }
+
+</script>
+
+{% endblock %}
