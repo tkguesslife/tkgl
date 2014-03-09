@@ -1,6 +1,6 @@
 tkgl_user:
     resource: "@TkglUserBundle/Controller/"
-    prefix:   /user
+    prefix:   /
     type: annotation
 
 tkgl_core:

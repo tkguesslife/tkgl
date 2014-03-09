@@ -1,1 +1,11 @@
-
+<table class="table table-striped table-hover " >    
+{% for user in users %}
+    <tr>
+        <td>
+            <a href="{{path('user_edit',{intUserId: user.id})}}" title="Edit user" class="ajaxLink">{{ user.person}} </a><br>
+            <small>{{ user.createdAt|date('M d Y g:i ')   }}</small>
+        </td>
+        
+    </tr>
+{% endfor %}
+</table>

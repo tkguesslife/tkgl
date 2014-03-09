@@ -1,1 +1,9 @@
-{{ form(userForm) }}
+{{ form_row(userForm.username) }}
+{{ form_row(userForm.password) }}
+{{ form_row(userForm.enabled) }}
+{{ form_row(userForm.email) }}
+{{ form_row(userForm.person.firstName) }}
+{{ form_row(userForm.person.lastName) }}
+  <div style="display:none"> {{ form_rest(userForm) }}</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+

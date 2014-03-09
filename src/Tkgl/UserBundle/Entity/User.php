@@ -24,7 +24,7 @@ class User extends BaseUser {
   protected $id;
 
   /**
-   * @ORM\OneToOne(targetEntity="Tkgl\CoreBundle\Entity\Person")
+   * @ORM\OneToOne(targetEntity="Tkgl\CoreBundle\Entity\Person" ,cascade={"persist"})
    * @ORM\JoinColumn(name="personId", referencedColumnName="id")
    */
   protected $person;

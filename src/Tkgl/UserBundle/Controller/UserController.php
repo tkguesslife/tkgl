@@ -30,19 +30,21 @@ class UserController extends Controller {
    * @author Tiko Banyini <admin@tkbean.co.za>
    */
   public function manageUsers(){
-    
-    return array();
+    $arrUsers = $this->getDoctrine()->getRepository('TkglUserBundle:User')->findAll();
+      
+      
+    return array('users' => $arrUsers);
   }
   
    /**
-   * Display list of user's companies
+   * Display new user form
    *
    * @Route("/new", name="user_new")
    * @Method({"GET", "POST"})
    * @Template("TkglUserBundle:user:new.html.twig")
    * @author Tiko Banyini <admin@tkbean.co.za>
    */
-  public function newUser(Request $request){
+  public function newUser(Request $request){     
     
     $newUser = new User();
     $newPerson = new Person();
@@ -50,8 +52,42 @@ class UserController extends Controller {
     
     $newUserForm = $this->createForm(new UserFormType(),  $newUser);
     
-    
+    if($request->getMethod() == 'POST'){
+        $newUserForm->handleRequest($request);
+        if($newUserForm->isValid()){
+            $manager = $this->getDoctrine()->getManager();
+            
+            $manager->persist($newUser);
+            $manager->flush();
+        }
+    }
     return array('userForm' => $newUserForm->createView());
+  }
+  
+   /**
+   * Display edit user form
+   *
+   * @Route("/{intUserId}/edit", name="user_edit")
+   * @Method({"GET", "POST"})
+   * @Template("TkglUserBundle:user:edit.html.twig")
+   * @author Tiko Banyini <admin@tkbean.co.za>
+   */
+  public function editUser($intUserId, Request $request){     
+    $manager = $this->getDoctrine()->getManager();
+    $objUser = $manager->getRepository('TkglUserBundle:User')->find($intUserId);    
+    
+    $userForm = $this->createForm(new UserFormType(),  $objUser);    
+    if($request->getMethod() == 'POST'){
+        $userForm->handleRequest($request);
+        if($userForm->isValid()){
+            
+            
+            $manager->persist($userForm);
+            $manager->flush();
+        }
+    }
+    return array('userForm' => $userForm->createView()
+            , 'user' => $objUser);
   }
   
 }

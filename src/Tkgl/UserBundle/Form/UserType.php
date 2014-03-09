@@ -16,12 +16,14 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')            
+            ->add('password', 'password')
             ->add('email')
-            ->add('enabled')
-            ->add('password')
+            ->add('enabled', 'choice', array(
+                'choices' => array(true => 'Yes', false => 'No'),
+                'required' => false))
             ->add('roles')
             ->add('person', new \Tkgl\CoreBundle\Form\PersonType() )
-            ->add('userGroups')
+            ->add('userGroups')            
         ;
     }
     

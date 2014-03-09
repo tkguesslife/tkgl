@@ -68,6 +68,10 @@ class Person {
    */
   protected $personPhoneNumbers;
 
+  
+  public function __toString() {
+      return $this->getFirstName().'  '.$this->getLastName();
+  }
 
     /**
      * Constructor
