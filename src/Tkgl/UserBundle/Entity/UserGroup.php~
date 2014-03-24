@@ -42,12 +42,13 @@ class UserGroup  extends BaseAuditableEntity{
     return $this->name;
   }
    
+   
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->teamUsers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -64,7 +65,7 @@ class UserGroup  extends BaseAuditableEntity{
      * Set name
      *
      * @param string $name
-     * @return UserTeam
+     * @return UserGroup
      */
     public function setName($name)
     {
@@ -81,62 +82,6 @@ class UserGroup  extends BaseAuditableEntity{
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set teamDescription
-     *
-     * @param string $teamDescription
-     * @return UserTeam
-     */
-    public function setTeamDescription($teamDescription)
-    {
-        $this->teamDescription = $teamDescription;
-
-        return $this;
-    }
-
-    /**
-     * Get teamDescription
-     *
-     * @return string 
-     */
-    public function getTeamDescription()
-    {
-        return $this->teamDescription;
-    }
-
-    /**
-     * Add teamUsers
-     *
-     * @param \Tkgl\UserBundle\Entity\User $teamUsers
-     * @return UserTeam
-     */
-    public function addTeamUser(\Tkgl\UserBundle\Entity\User $teamUsers)
-    {
-        $this->teamUsers[] = $teamUsers;
-
-        return $this;
-    }
-
-    /**
-     * Remove teamUsers
-     *
-     * @param \Tkgl\UserBundle\Entity\User $teamUsers
-     */
-    public function removeTeamUser(\Tkgl\UserBundle\Entity\User $teamUsers)
-    {
-        $this->teamUsers->removeElement($teamUsers);
-    }
-
-    /**
-     * Get teamUsers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTeamUsers()
-    {
-        return $this->teamUsers;
     }
 
     /**
@@ -194,7 +139,6 @@ class UserGroup  extends BaseAuditableEntity{
     {
         return $this->users;
     }
-
     /**
      * @ORM\PrePersist
      */

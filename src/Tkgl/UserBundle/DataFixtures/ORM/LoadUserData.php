@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 use Tkgl\CoreBundle\Entity\Person;
 use Tkgl\UserBundle\Entity\User;
+use Tkgl\UserBundle\Entity\UserTeam;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -38,6 +39,13 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
    * {@inheritDoc}
    */
   public function load(ObjectManager $manager) {
+      
+      $supportTeam = new UserTeam();
+      $supportTeam->setName('Support team');
+      $supportTeam->setTeamDescription('Default support team');
+      $manager->persist($supportTeam);
+      
+      
     
     //Administrator User    
     $person = new Person();        
@@ -55,9 +63,11 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
     $userAdmin->setEnabled(true);
     $userAdmin->setRoles(array('ROLE_ADMIN'));
     $userAdmin->setPerson($person);
-    $manager->persist($userAdmin);
-     
+    $manager->persist($userAdmin);     
+    $supportTeam->addTeamUser($userAdmin);
     $manager->flush();
+    
+    
     
     $this->addReference('admin-user', $userAdmin);    
     

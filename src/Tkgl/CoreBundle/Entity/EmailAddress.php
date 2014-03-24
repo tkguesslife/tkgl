@@ -32,7 +32,7 @@ class EmailAddress extends BaseAuditableEntity {
    */
   protected $emailAddress;
 
-    
+   
 
     /**
      * Get id
@@ -89,7 +89,6 @@ class EmailAddress extends BaseAuditableEntity {
     {
         return $this->emailAddressType;
     }
-
     /**
      * @ORM\PrePersist
      */

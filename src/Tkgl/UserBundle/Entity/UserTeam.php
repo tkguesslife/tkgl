@@ -1,16 +1,16 @@
 <?php
-
 namespace Tkgl\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Tkgl\UserBundle\Entity\Repository\UserTeamRepository")
  * @ORM\Table(name="userTeam", options={"comment" = "Stores user team desciption."})
  * @ORM\HasLifecycleCallbacks
  */
-class UserTeam {
+class UserTeam  extends BaseAuditableEntity{
 
   /**
    * @ORM\Id
@@ -32,57 +32,49 @@ class UserTeam {
   protected $teamDescription;
 
   /**
-   * @ORM\OneToMany(targetEntity="Tkgl\UserBundle\Entity\User", mappedBy="consultantTeam", cascade="persist")   
+   * @ORM\ManyToMany(targetEntity="Tkgl\UserBundle\Entity\User", mappedBy="userTeams", cascade={"persist"})   
    */
-  protected $teamUsers;
+  protected $teamUsers;  
   
-
   /**
-   * @ORM\ManyToOne(targetEntity="\Tkgl\UserBundle\Entity\User")
-   * @ORM\JoinColumn(name="CreatedById", referencedColumnName="id")
+   *
+   * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Province")
+   * @ORM\JoinColumn(name="provinceId", referencedColumnName="id")
    */
-  protected $createdBy;
-
+  protected $province;
+  
   /**
-   * @ORM\Column(type="datetime")
+   * @ORM\Column(type="string", length=100, nullable=true)
    */
-  protected $createdAt;
-
-  /**
-   * @ORM\Column(type="datetime", nullable=true)
-   */
-  protected $updatedAt;
-
-
-  public function __toString() {
-    return $this->name;
-  }
-
-  /**
-   * @ORM\PrePersist 
-   */
-  public function doStuffOnPrePersist() {
-    $this->setCreatedAt(new \DateTime());
-  }
-
-  /**
-   * @ORM\PreUpdate 
-   */
-  public function doStuffOnPreUpdate() {
-    $this->setUpdatedAt(new \DateTime());
-  }
-
+  protected  $region;
   
     /**
-     * Constructor
+   * @ORM\OneToMany(targetEntity="Tkgl\CoreBundle\Entity\Deal", mappedBy="team")
+   */
+  protected $deals;
+
+
+  /**
+     * @ORM\PrePersist
      */
-    public function __construct()
+    public function doStuffOnPrePersist()
     {
-        $this->teamUsers = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->deals = new \Doctrine\Common\Collections\ArrayCollection();
+        parent::doStuffOnPrePersist();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function doStuffOnPreUpdate()
+    {
+        parent::doStuffOnPreUpdate();
     }
     
-    
+    public function __toString() {
+        return $this->getName();
+    }
+
+
 
     /**
      * Get id
@@ -141,52 +133,6 @@ class UserTeam {
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return UserTeam
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     * @return UserTeam
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime 
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
      * Add teamUsers
      *
      * @param \Tkgl\UserBundle\Entity\User $teamUsers
@@ -194,6 +140,7 @@ class UserTeam {
      */
     public function addTeamUser(\Tkgl\UserBundle\Entity\User $teamUsers)
     {
+        $teamUsers->addUserTeam($this);
         $this->teamUsers[] = $teamUsers;
 
         return $this;
@@ -219,13 +166,69 @@ class UserTeam {
         return $this->teamUsers;
     }
 
+
+
+    /**
+     * Set province
+     *
+     * @param \Tkgl\CoreBundle\Entity\Province $province
+     * @return UserTeam
+     */
+    public function setProvince(\Tkgl\CoreBundle\Entity\Province $province = null)
+    {
+        $this->province = $province;
+
+        return $this;
+    }
+
+    /**
+     * Get province
+     *
+     * @return \Tkgl\CoreBundle\Entity\Province 
+     */
+    public function getProvince()
+    {
+        return $this->province;
+    }
+
+    /**
+     * Set region
+     *
+     * @param string $region
+     * @return UserTeam
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region
+     *
+     * @return string 
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->teamUsers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
     /**
      * Add deals
      *
-     * @param \Tkgl\DealBundle\Entity\Deal $deals
+     * @param \Tkgl\CoreBundle\Entity\Deal $deals
      * @return UserTeam
      */
-    public function addDeal(\Tkgl\DealBundle\Entity\Deal $deals)
+    public function addDeal(\Tkgl\CoreBundle\Entity\Deal $deals)
     {
         $this->deals[] = $deals;
 
@@ -235,9 +238,9 @@ class UserTeam {
     /**
      * Remove deals
      *
-     * @param \Tkgl\DealBundle\Entity\Deal $deals
+     * @param \Tkgl\CoreBundle\Entity\Deal $deals
      */
-    public function removeDeal(\Tkgl\DealBundle\Entity\Deal $deals)
+    public function removeDeal(\Tkgl\CoreBundle\Entity\Deal $deals)
     {
         $this->deals->removeElement($deals);
     }
@@ -250,28 +253,5 @@ class UserTeam {
     public function getDeals()
     {
         return $this->deals;
-    }
-
-    /**
-     * Set createdBy
-     *
-     * @param \Tkgl\UserBundle\Entity\User $createdBy
-     * @return UserTeam
-     */
-    public function setCreatedBy(\Tkgl\UserBundle\Entity\User $createdBy = null)
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return \Tkgl\UserBundle\Entity\User 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
     }
 }

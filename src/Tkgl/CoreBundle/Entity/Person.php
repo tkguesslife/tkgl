@@ -4,12 +4,14 @@ namespace Tkgl\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="person")
+ * @ORM\HasLifecycleCallbacks
  */
-class Person {
+class Person extends BaseAuditableEntity {
 
   /**
    * @ORM\Id
@@ -71,8 +73,25 @@ class Person {
   
   public function __toString() {
       return $this->getFirstName().'  '.$this->getLastName();
-  }
+  }  
 
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function doStuffOnPrePersist()
+    {
+        parent::doStuffOnPrePersist();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function doStuffOnPreUpdate()
+    {
+        parent::doStuffOnPreUpdate();
+    }
+    
     /**
      * Constructor
      */
@@ -279,10 +298,10 @@ class Person {
     /**
      * Add personAddress
      *
-     * @param \Tkgl\CoreBundle\Entity\personAddress $personAddress
+     * @param \Tkgl\CoreBundle\Entity\PersonAddress $personAddress
      * @return Person
      */
-    public function addPersonAddress(\Tkgl\CoreBundle\Entity\personAddress $personAddress)
+    public function addPersonAddress(\Tkgl\CoreBundle\Entity\PersonAddress $personAddress)
     {
         $this->personAddress[] = $personAddress;
 
@@ -292,9 +311,9 @@ class Person {
     /**
      * Remove personAddress
      *
-     * @param \Tkgl\CoreBundle\Entity\personAddress $personAddress
+     * @param \Tkgl\CoreBundle\Entity\PersonAddress $personAddress
      */
-    public function removePersonAddress(\Tkgl\CoreBundle\Entity\personAddress $personAddress)
+    public function removePersonAddress(\Tkgl\CoreBundle\Entity\PersonAddress $personAddress)
     {
         $this->personAddress->removeElement($personAddress);
     }
@@ -312,10 +331,10 @@ class Person {
     /**
      * Add personPhoneNumbers
      *
-     * @param \Tkgl\CoreBundle\Entity\personPhoneNumber $personPhoneNumbers
+     * @param \Tkgl\CoreBundle\Entity\PersonPhoneNumber $personPhoneNumbers
      * @return Person
      */
-    public function addPersonPhoneNumber(\Tkgl\CoreBundle\Entity\personPhoneNumber $personPhoneNumbers)
+    public function addPersonPhoneNumber(\Tkgl\CoreBundle\Entity\PersonPhoneNumber $personPhoneNumbers)
     {
         $this->personPhoneNumbers[] = $personPhoneNumbers;
 
@@ -325,9 +344,9 @@ class Person {
     /**
      * Remove personPhoneNumbers
      *
-     * @param \Tkgl\CoreBundle\Entity\personPhoneNumber $personPhoneNumbers
+     * @param \Tkgl\CoreBundle\Entity\PersonPhoneNumber $personPhoneNumbers
      */
-    public function removePersonPhoneNumber(\Tkgl\CoreBundle\Entity\personPhoneNumber $personPhoneNumbers)
+    public function removePersonPhoneNumber(\Tkgl\CoreBundle\Entity\PersonPhoneNumber $personPhoneNumbers)
     {
         $this->personPhoneNumbers->removeElement($personPhoneNumbers);
     }
@@ -341,4 +360,7 @@ class Person {
     {
         return $this->personPhoneNumbers;
     }
+
+
+
 }

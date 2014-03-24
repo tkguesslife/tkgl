@@ -32,7 +32,6 @@ class PersonPhoneNumber extends BaseAuditableEntity  {
   
   
 
-
     /**
      * Get id
      *

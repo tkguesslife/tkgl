@@ -1,5 +1,4 @@
 <?php
-
 namespace Tkgl\UserBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;

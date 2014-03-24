@@ -37,6 +37,22 @@ class UserController extends Controller {
   }
   
    /**
+   * Display list of users in a team
+   *
+   * @Route("/{teamId}/team", name="team_users")
+   * @Method("GET")
+   * @Template("TkglUserBundle:user:_list.html.twig")
+   * @author Tiko Banyini <admin@tkbean.co.za>
+   */
+  public function teamUsers($teamId){
+    $objTeam = $this->getDoctrine()->getRepository('TkglUserBundle:UserTeam')->find($teamId);    
+      
+    return array('users' => $objTeam->getTeamUsers());
+  }
+  
+  
+  
+   /**
    * Display new user form
    *
    * @Route("/new", name="user_new")

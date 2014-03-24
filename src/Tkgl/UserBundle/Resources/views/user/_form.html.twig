@@ -4,6 +4,11 @@
 {{ form_row(userForm.email) }}
 {{ form_row(userForm.person.firstName) }}
 {{ form_row(userForm.person.lastName) }}
-  <div style="display:none"> {{ form_rest(userForm) }}</div>
-<button type="submit" class="btn btn-primary">Submit</button>
+<div style="display:none"> {{ form_rest(userForm) }}</div>
+<div class="control-group">
+    <div class="controls">                      
+        <button type="submit" class="btn btn-white">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</div>
 

@@ -1,17 +1,27 @@
-{% extends "::base.html.twig" %}
- {% block body %}
+{% extends "::first.html.twig" %}
 
-<div class="col-lg-4">
-    <h4>System users  | <a href="{{path('user_new')}}" title="Add new user" class="ajaxLink"> Add</a></h4>
-    {{ include(
+{% block body %}
+    <div class="clearfix">
+        <h4><i class="icon-th-list"></i> Manage application users | <a href="{{path('user_new')}}" title="Add new user" class="ajaxLink"> Add</a></h4>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <section class="panel">
+                
+                <div class="pull-out m-t-small">
+                    
+                    {{ include(
     'TkglUserBundle:user:_list.html.twig',
     { 'users': users }
 ) }}
-    
-</div>
-<div id="divTopMiddle" class="col-lg-5">    
+                </div>
+            </section>
+        </div>
+  <div id="divTopMiddle" class="span6">    
 
 </div>
+    </div>
+
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -59,5 +69,20 @@
     }
 
 </script>
-
 {% endblock %}
+{# {% block body %}
+
+<div class="col-lg-5">
+    <h4>System users  | <a href="{{path('user_new')}}" title="Add new user" class="ajaxLink"> Add</a></h4>
+    {{ include(
+    'TkglUserBundle:user:_list.html.twig',
+    { 'users': users }
+) }}
+    
+</div>
+<div id="divTopMiddle" class="col-lg-5">    
+
+</div>
+
+
+{% endblock %}#}

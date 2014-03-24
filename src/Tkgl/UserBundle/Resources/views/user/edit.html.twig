@@ -1,7 +1,9 @@
-<h4>Edit user</h4>
+<section class="panel">
+<h4><i class="icon-edit"></i>Edit user</h4>
 <form class="form-horizontal" role="form" method="POST" {{ form_enctype(userForm) }}  action="{{path('user_edit', {intUserId: user.id})}}">
 {{ include(
     'TkglUserBundle:user:_form.html.twig',
     { 'userForm': userForm, 'action': 'edit' }
 ) }}
 </form>
+</section>

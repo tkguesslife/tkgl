@@ -3,81 +3,83 @@
 namespace Tkgl\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Tkgl\CoreBundle\Entity\BaseEntity;
 
 /**
  * Description of BaseAuditableEntity
- *
+ * @ORM\MappedSuperclass
+ * 
  * @author     Tiko Banyini <admin@tkbean.co.za>
  */
-class BaseAuditableEntity extends BaseEntity {
+abstract class BaseAuditableEntity{
 
-  /**
-   * @ORM\ManyToOne(targetEntity="Tkgl\UserBundle\Entity\User")
-   * @ORM\JoinColumn(name="createdById", referencedColumnName="id")
-   */
-  private $createdBy;
+    /**
+     * @ORM\ManyToOne(targetEntity="Tkgl\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="createdById", referencedColumnName="id")
+     */
+    private $createdBy;
 
-  /**
-   * @var \DateTime
-   */
-  private $createdAt;
 
-  /**
-   * @var \DateTime
-   */
-  private $updatedAt;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
-  /**
-   * @ORM\ManyToOne(targetEntity="Tkgl\UserBundle\Entity\User")
-   * @ORM\JoinColumn(name="updatedById", referencedColumnName="id")
-   */
-  private $updatedBy;
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
-  /**
-   * @ORM\PrePersist 
-   */
-  public function doStuffOnPrePersist() {
-    $this->setCreatedAt(new \DateTime());
-  }
 
-  /**
-   * @ORM\PreUpdate 
-   */
-  public function doStuffOnPreUpdate() {
-    $this->setUpdatedAt(new \DateTime());
-  }
+    /**
+     * @ORM\ManyToOne(targetEntity="Tkgl\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="updatedById", referencedColumnName="id")
+     */
+    private $updatedBy;
 
-  public function getCreatedBy() {
-    return $this->createdBy;
-  }
+    /**
+     * @ORM\PrePersist 
+     */
+    public function doStuffOnPrePersist() {
+        $this->setCreatedAt(new \DateTime());
+    }
 
-  public function getCreatedAt() {
-    return $this->createdAt;
-  }
+    /**
+     * @ORM\PreUpdate 
+     */
+    public function doStuffOnPreUpdate() {
+        $this->setUpdatedAt(new \DateTime());
+    }
 
-  public function getUpdatedAt() {
-    return $this->updatedAt;
-  }
+    public function getCreatedBy() {
+        return $this->createdBy;
+    }
 
-  public function getUpdatedBy() {
-    return $this->updatedBy;
-  }
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
 
-  public function setCreatedBy($createdBy) {
-    $this->createdBy = $createdBy;
-  }
+    public function getUpdatedAt() {
+        return $this->updatedAt;
+    }
 
-  public function setCreatedAt(\DateTime $createdAt) {
-    $this->createdAt = $createdAt;
-  }
+    public function getUpdatedBy() {
+        return $this->updatedBy;
+    }
 
-  public function setUpdatedAt(\DateTime $updatedAt) {
-    $this->updatedAt = $updatedAt;
-  }
+    public function setCreatedBy($createdBy) {
+        $this->createdBy = $createdBy;
+    }
 
-  public function setUpdatedBy($updatedBy) {
-    $this->updatedBy = $updatedBy;
-  }
+    public function setCreatedAt(\DateTime $createdAt) {
+        $this->createdAt = $createdAt;
+    }
+
+    public function setUpdatedAt(\DateTime $updatedAt) {
+        $this->updatedAt = $updatedAt;
+    }
+
+    public function setUpdatedBy($updatedBy) {
+        $this->updatedBy = $updatedBy;
+    }
 
 }

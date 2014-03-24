@@ -6,8 +6,7 @@
 {% if error %}
     <div>{{ error|trans }}</div>
 {% endif %}
-<form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
+<form class="padder" action="{{ path("fos_user_security_check") }}" method="post" >        
 
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 

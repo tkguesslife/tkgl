@@ -40,7 +40,6 @@ class Address extends BaseAuditableEntity {
 
   
 
-
     /**
      * Get id
      *
@@ -119,7 +118,6 @@ class Address extends BaseAuditableEntity {
     {
         return $this->addressType;
     }
-
     /**
      * @ORM\PrePersist
      */

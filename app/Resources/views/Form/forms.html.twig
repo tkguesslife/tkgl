@@ -16,9 +16,9 @@
 
 {% block form_row %}
 {% spaceless %}
-<div class="form-group {{ errors|length > 0 ? 'error' : '' }}">
-        {{ form_label(form,'', { 'label_attr': {'class': 'col-sm-3 control-label'} }) }}
-    <div class="col-sm-8">
+<div class="control-group {{ errors|length > 0 ? 'error' : '' }}">
+        {{ form_label(form,'', { 'label_attr': {'class': 'control-label'} }) }}
+    <div class="controls">
         {{ form_widget(form,{'attr': {'class':'form-control'}}) }}
         {{ form_errors(form) }}
         </div>

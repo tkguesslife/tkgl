@@ -24,16 +24,28 @@ class User extends BaseUser {
   protected $id;
 
   /**
-   * @ORM\OneToOne(targetEntity="Tkgl\CoreBundle\Entity\Person" ,cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Person" ,cascade={"persist"})
    * @ORM\JoinColumn(name="personId", referencedColumnName="id")
    */
   protected $person;
 
   /**
    * @ORM\ManyToMany(targetEntity="Tkgl\UserBundle\Entity\UserGroup", inversedBy="users")
-   * @ORM\JoinTable(name="usersGroups")   
+   * @ORM\JoinTable(name="usersGroups",
+     *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="userGroupId", referencedColumnName="id")}
+     *      )   
    */
   protected $userGroups;
+
+  /**
+   * @ORM\ManyToMany(targetEntity="Tkgl\UserBundle\Entity\UserTeam", inversedBy="teamUsers")
+   * @ORM\JoinTable(name="userTeams",
+     *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="userTeamId", referencedColumnName="id")}
+     *      )   
+   */
+  protected $userTeams;
 
   /**
    * @ORM\Column(type="datetime")
@@ -59,15 +71,7 @@ class User extends BaseUser {
     $this->setUpdatedAt(new \DateTime());
   }
   
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        
-        $this->userGroups = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+  
 
     /**
      * Get id
@@ -180,4 +184,47 @@ class User extends BaseUser {
     {
         return $this->userGroups;
     }
+
+    /**
+     * Add userTeams
+     *
+     * @param \Tkgl\UserBundle\Entity\UserTeam $userTeams
+     * @return User
+     */
+    public function addUserTeam(\Tkgl\UserBundle\Entity\UserTeam $userTeams)
+    {
+        $this->userTeams[] = $userTeams;
+        $userTeams->addTeamUser($this);
+        return $this;
+    }
+
+    /**
+     * Remove userTeams
+     *
+     * @param \Tkgl\UserBundle\Entity\UserTeam $userTeams
+     */
+    public function removeUserTeam(\Tkgl\UserBundle\Entity\UserTeam $userTeams)
+    {
+        $this->userTeams->removeElement($userTeams);
+    }
+
+    /**
+     * Get userTeams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserTeams()
+    {
+        return $this->userTeams;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->userGroups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userTeams = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }

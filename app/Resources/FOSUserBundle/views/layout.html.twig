@@ -4,7 +4,13 @@
 
 
 {% block body %}
-<div class="container">
-          {% block fos_user_content %}{% endblock %}
-</div>
+    <section id="content"><div class="row-fluid">
+            <div class="span4 offset4 m-t-large">
+                <section class="panel"><header class="panel-heading text-center">
+                        Sign in
+                    </header>
+                {% block fos_user_content %}{% endblock %}
+        </div>
+    </div>
+</section>
 {% endblock %}

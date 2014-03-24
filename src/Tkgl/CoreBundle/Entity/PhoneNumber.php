@@ -34,6 +34,8 @@ class PhoneNumber extends BaseAuditableEntity {
   protected $phoneNumber;
   
 
+   
+
     /**
      * Get id
      *
@@ -89,7 +91,6 @@ class PhoneNumber extends BaseAuditableEntity {
     {
         return $this->phoneNumberType;
     }
-
     /**
      * @ORM\PrePersist
      */
