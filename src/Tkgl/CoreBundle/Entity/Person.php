@@ -54,6 +54,11 @@ class Person extends BaseAuditableEntity {
    * @ORM\Column(type="string", length=100, nullable=true)   
    */
   protected $idnumber;
+  
+  /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateOfBirth;
 
   /**
    * @ORM\Column(type="string", length=100, nullable=true)      * 
@@ -363,4 +368,27 @@ class Person extends BaseAuditableEntity {
 
 
 
+
+    /**
+     * Set dateOfBirth
+     *
+     * @param \DateTime $dateOfBirth
+     * @return Person
+     */
+    public function setDateOfBirth($dateOfBirth)
+    {
+        $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfBirth
+     *
+     * @return \DateTime 
+     */
+    public function getDateOfBirth()
+    {
+        return $this->dateOfBirth;
+    }
 }

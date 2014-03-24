@@ -221,4 +221,37 @@ class UserTeam  extends BaseAuditableEntity{
         $this->teamUsers = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
+    /**
+     * Add deals
+     *
+     * @param \Tkgl\CoreBundle\Entity\Deal $deals
+     * @return UserTeam
+     */
+    public function addDeal(\Tkgl\CoreBundle\Entity\Deal $deals)
+    {
+        $this->deals[] = $deals;
+
+        return $this;
+    }
+
+    /**
+     * Remove deals
+     *
+     * @param \Tkgl\CoreBundle\Entity\Deal $deals
+     */
+    public function removeDeal(\Tkgl\CoreBundle\Entity\Deal $deals)
+    {
+        $this->deals->removeElement($deals);
+    }
+
+    /**
+     * Get deals
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDeals()
+    {
+        return $this->deals;
+    }
 }

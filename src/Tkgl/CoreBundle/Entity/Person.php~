@@ -54,6 +54,11 @@ class Person extends BaseAuditableEntity {
    * @ORM\Column(type="string", length=100, nullable=true)   
    */
   protected $idnumber;
+  
+  /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateOfBirth;
 
   /**
    * @ORM\Column(type="string", length=100, nullable=true)      * 
