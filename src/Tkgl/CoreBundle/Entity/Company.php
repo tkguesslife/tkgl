@@ -33,7 +33,7 @@ class Company {
     /**
      *
      * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Province")
-     * @ORM\JoinColumn(name="provinceId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="province_id", referencedColumnName="id")
      */
     protected $province;
 
@@ -93,4 +93,50 @@ class Company {
         return $this->companyDescription;
     }
 
+
+    /**
+     * Set region
+     *
+     * @param string $region
+     * @return Company
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region
+     *
+     * @return string 
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * Set province
+     *
+     * @param \Tkgl\CoreBundle\Entity\Province $province
+     * @return Company
+     */
+    public function setProvince(\Tkgl\CoreBundle\Entity\Province $province = null)
+    {
+        $this->province = $province;
+
+        return $this;
+    }
+
+    /**
+     * Get province
+     *
+     * @return \Tkgl\CoreBundle\Entity\Province 
+     */
+    public function getProvince()
+    {
+        return $this->province;
+    }
 }

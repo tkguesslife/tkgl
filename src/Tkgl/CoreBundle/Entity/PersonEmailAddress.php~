@@ -5,7 +5,7 @@ use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="personEmailAddress")
+ * @ORM\Table(name="person_email_address")
  */
 class PersonEmailAddress extends BaseAuditableEntity {
   
@@ -19,13 +19,13 @@ class PersonEmailAddress extends BaseAuditableEntity {
   
     /**
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Person", inversedBy="personAddress")
-   * @ORM\JoinColumn(name="personId", referencedColumnName="id")     
+   * @ORM\JoinColumn(name="person_id", referencedColumnName="id")     
    */
   protected $person;
   
   /** 
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\EmailAddress")
-   * @ORM\JoinColumn(name="addressId", referencedColumnName="id")   
+   * @ORM\JoinColumn(name="address_id", referencedColumnName="id")   
    */
   protected $emailAddress;
   

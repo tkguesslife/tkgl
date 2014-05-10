@@ -1,0 +1,10 @@
+<section class="panel">
+    <header class="panel-heading">Edit team</header>
+
+    <form class="form-horizontal" role="form" method="POST" {{ form_enctype(teamForm) }}  action="{{path('team_edit', {teamId: userTeam.id})}}">
+        {{ include(
+    'TkglUserBundle:userTeam:_form.html.twig',
+    { 'teamForm': teamForm, 'action': 'edit' }
+) }}
+    </form>
+</section>

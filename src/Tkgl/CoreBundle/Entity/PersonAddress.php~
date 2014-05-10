@@ -5,7 +5,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="personAddress")
+ * @ORM\Table(name="person_address")
  */
 class PersonAddress {
   
@@ -19,13 +19,13 @@ class PersonAddress {
   
     /**
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Person", inversedBy="personAddress")
-   * @ORM\JoinColumn(name="personId", referencedColumnName="id")     
+   * @ORM\JoinColumn(name="person_id", referencedColumnName="id")     
    */
   protected $person;
   
   /** 
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Address")
-   * @ORM\JoinColumn(name="addressId", referencedColumnName="id")   
+   * @ORM\JoinColumn(name="address_id", referencedColumnName="id")   
    */
   protected $address;
   

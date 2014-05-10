@@ -8,7 +8,7 @@ use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="emailAddress", options={"comment" = "Stores email addresses"})
+ * @ORM\Table(name="email_address", options={"comment" = "Stores email addresses"})
  * @ORM\HasLifecycleCallbacks
  */
 class EmailAddress extends BaseAuditableEntity {
@@ -23,7 +23,7 @@ class EmailAddress extends BaseAuditableEntity {
   
   /**
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\EmailAddressType")
-   * @ORM\JoinColumn(name="emailAddressTypeId", referencedColumnName="id")
+   * @ORM\JoinColumn(name="email_address_type_id", referencedColumnName="id")
    */
   protected $emailAddressType;
 

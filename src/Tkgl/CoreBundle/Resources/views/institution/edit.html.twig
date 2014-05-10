@@ -1,0 +1,16 @@
+
+<section class="panel">
+    <header class="panel-heading">
+        <span class="pull-right">
+            {#<a href="{{path('team_new')}}" title="Add new team" class="ajaxLink btn btn-default btn-small"> Add new</a>#}
+        </span>
+        <i class="icon-edit"></i>Edit institution
+    </header>
+    <form class="form-horizontal" role="form" method="POST" {{ form_enctype(institutionForm) }}  action="{{path('institution_edit', {institutionId: institution.id})}}">
+       {{ include(
+                    'TkglCoreBundle:institution:_form.html.twig',
+                    { 'institutionForm': institutionForm, 'action': 'edit' }
+                ) }}
+    </form>
+</section>
+

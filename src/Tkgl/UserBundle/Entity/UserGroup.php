@@ -8,7 +8,7 @@ use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="userGroup", options={"comment" = "Stores user group desciption."})
+ * @ORM\Table(name="user_group", options={"comment" = "Stores user group desciption."})
  * @ORM\HasLifecycleCallbacks
  */
 class UserGroup  extends BaseAuditableEntity{

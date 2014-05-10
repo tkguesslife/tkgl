@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="sysUser", options={"comment" = "Users that have access to application."})
+ * @ORM\Table(name="sys_user", options={"comment" = "Users that have access to application."})
  * @ORM\HasLifecycleCallbacks()
  */
 class User extends BaseUser {
@@ -25,15 +25,15 @@ class User extends BaseUser {
 
   /**
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Person" ,cascade={"persist"})
-   * @ORM\JoinColumn(name="personId", referencedColumnName="id")
+   * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
    */
   protected $person;
 
   /**
    * @ORM\ManyToMany(targetEntity="Tkgl\UserBundle\Entity\UserGroup", inversedBy="users")
    * @ORM\JoinTable(name="usersGroups",
-     *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="userGroupId", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_group_id", referencedColumnName="id")}
      *      )   
    */
   protected $userGroups;
@@ -42,7 +42,7 @@ class User extends BaseUser {
    * @ORM\ManyToMany(targetEntity="Tkgl\UserBundle\Entity\UserTeam", inversedBy="teamUsers")
    * @ORM\JoinTable(name="userTeams",
      *      joinColumns={@ORM\JoinColumn(name="userId", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="userTeamId", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_team_id", referencedColumnName="id")}
      *      )   
    */
   protected $userTeams;
@@ -56,6 +56,28 @@ class User extends BaseUser {
    * @ORM\Column(type="datetime", nullable=true)
    */
   protected $updatedAt;
+  
+    public static function loadValidatorMetadata(ClassMetadata $metadata) {
+    $metadata->addPropertyConstraint('username', new NotBlank(array('message' =>'Username is required.')));
+    $metadata->addPropertyConstraint('password', new NotBlank(array('message' =>'Password is required.')));
+    $metadata->addPropertyConstraint('email', new NotBlank(array('message' =>'Email is required.')));
+
+    $metadata->addConstraint(new UniqueEntity(array(
+                'fields' => 'username',
+                'message' => 'Username already exists.',
+            )));
+
+    $metadata->addConstraint(new UniqueEntity(array(
+                'fields' => 'email',
+                'message' => 'Email already exists.',
+            )));
+
+
+    $metadata->addPropertyConstraint('email', new Assert\Email(array(
+                'message' => ' "{{ value }}" is not a valid email.',
+                'checkMX' => false,
+            )));
+  }
   
     /**
    * @ORM\PrePersist 

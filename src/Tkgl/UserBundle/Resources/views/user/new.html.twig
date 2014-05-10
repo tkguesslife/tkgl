@@ -1,9 +1,9 @@
-<section class="panel">
-    <h4><i class="icon-edit"></i>Add new user</h4>
+<section class="panel">                        
+    <header class="panel-heading"><i class="icon-edit"></i>Create new user</header>
     <form class="form-horizontal" role="form" method="POST" {{ form_enctype(userForm) }}  action="{{path('user_new')}}">
         {{ include(
-    'TkglUserBundle:user:_form.html.twig',
-    { 'userForm': userForm, 'action': 'create' }
-) }}
+                    'TkglUserBundle:user:_form.html.twig',
+                    { 'userForm': userForm, 'action': 'create' }
+                ) }}
     </form>
 </section>

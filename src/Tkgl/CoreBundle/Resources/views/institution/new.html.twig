@@ -1,0 +1,9 @@
+<section class="panel">                        
+    <header class="panel-heading"><i class="icon-edit"></i>Create new institution</header>
+    <form class="form-horizontal" role="form" method="POST" {{ form_enctype(institutionForm) }}  action="{{path('institution_new')}}">
+        {{ include(
+                    'TkglCoreBundle:institution:_form.html.twig',
+                    { 'institutionForm': institutionForm, 'action': 'create' }
+                ) }}
+    </form>
+</section>

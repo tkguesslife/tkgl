@@ -1,0 +1,44 @@
+<section class="panel">
+    <header class="panel-heading"><span class="pull-right"><a href="{{path('institution_new')}}" title="Add new institution" class="ajaxLink pull-right btn btn-default btn-small"> Create institution</a></h4></span>
+              Institutions
+            </header>
+    <div class="pull-out">
+<table class="table table-striped m-b-none text-small">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Province</th>
+            <th>Region</th>            
+        </tr>
+    </thead>
+    <tbody>
+        {% for institution in institutions %}
+            <tr>
+                <td>                    
+                    <a href="{{path('institution_edit',{institutionId: institution.id})}}" title="Edit user" class="ajaxLink">{{ institution.name}} </a><br>
+                </td>
+                <td>                    
+                    <a href="{{path('institution_edit',{institutionId: institution.id})}}" title="Edit user" class="ajaxLink">{{ institution.institutionDescription}} </a><br>
+                </td>
+                <td>
+                    <a href="{{path('institution_edit',{institutionId: institution.id})}}" title="Edit user" class="ajaxLink">{{ institution.institutionType}} </a>
+                </td>
+                <td>
+                    <a href="{{path('institution_edit',{institutionId: institution.id})}}" title="Edit user" class="ajaxLink">{{ institution.province}} </a>
+                </td>
+                <td>
+                    <a href="{{path('institution_edit',{institutionId: institution.id})}}" title="Edit user" class="ajaxLink">{{ institution.region}} </a>
+                </td>
+            </tr>
+            {% else %}
+                <tr><td>
+                        <p>No institutions found.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+</div>
+</section>

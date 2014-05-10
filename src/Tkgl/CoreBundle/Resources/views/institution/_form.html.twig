@@ -1,0 +1,14 @@
+{{ form_row(institutionForm.name) }}
+{{ form_row(institutionForm.institutionDescription) }}
+{{ form_row(institutionForm.institutionType) }}
+{{ form_row(institutionForm.province) }}
+{{ form_row(institutionForm.region) }}
+
+<div style="display:none"> {{ form_rest(institutionForm) }}</div>
+<div class="control-group">
+    <div class="controls">                      
+        <a class="btn btn-white" href="{{path('institution_manage')}}">Cancel</a>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</div>
+

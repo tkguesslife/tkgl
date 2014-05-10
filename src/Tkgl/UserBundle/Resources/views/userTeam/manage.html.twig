@@ -1,23 +1,23 @@
 {% extends "::first.html.twig" %}
 {% block body %}
-    <div class="clearfix">
-        <h4><i class="icon-th-list"></i> User teams  | <a href="{{path('team_new')}}" title="Add new team" class="ajaxLink"> Add</a></h4>
-    </div>
+    <br>
     <div class="row-fluid">
-        <div class="span5">
-            {{ include(
+        <div id="divTopLeft"   class="span5">
+   {#         {{ include(
     'TkglUserBundle:userTeam:_list.html.twig',
     { 'teams': teams }
-) }}            
+) }}    #}        
         </div>
 
-        <div id="divTopMiddle" class="span6">    
+        <div id="divTopMiddle" class="span7">    
         </div>        
     </div>
 
     <script type="text/javascript">
 
         $(document).ready(function() {
+            
+            loadTeamList();
 
             $(".ajaxLink").live('click', function(e) {
                 e.preventDefault();
@@ -37,11 +37,14 @@
                 submittedForm = $(this);
                 postForm(submittedForm, function(response) {
                     if (response.success) {
-                        alert('done');
+                        loadTeamList();
                     }
                 });
             });
 
+            $('.cancelForm').live('click', function() {
+                closeDetailView();
+            });
 
 
         });
@@ -59,6 +62,22 @@
                     callback(data);
                 }
             });
+        }
+
+        function loadTeamList() {
+            $.ajax({
+                type: 'GET',
+                url: "{{path('team_list')}}",
+                data: {},
+                success: function(data) {
+                    $("#divTopLeft").html(data);
+                }
+            });
+
+        }
+
+        function closeDetailView() {
+            $("#divTopMiddle").html('');
         }
 
     </script>

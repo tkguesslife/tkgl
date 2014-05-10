@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="phoneType", options={"comment" = "Mobile, Home, Work"})
+ * @ORM\Table(name="phone_number_type", options={"comment" = "Mobile, Home, Work"})
  */
 class PhoneNumberType {
 

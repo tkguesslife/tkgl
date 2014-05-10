@@ -11,36 +11,43 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Company {
 
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
-  protected $id;
-  
-  /**
-   * @ORM\Column(type="string", length=100, nullable=true)   
-   * @Assert\NotBlank(message="Name required.", groups={"companyNameValidation"})
-   */
-  protected $companyName;
-  
-   /**
-   * @ORM\Column(type="text")
-   * @Assert\NotBlank()
-   */
-  protected $companyDescription;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)   
+     * @Assert\NotBlank(message="Name required.", groups={"companyNameValidation"})
+     */
+    protected $companyName;
 
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     */
+    protected $companyDescription;
 
-  
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Province")
+     * @ORM\JoinColumn(name="province_id", referencedColumnName="id")
+     */
+    protected $province;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $region;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -50,8 +57,7 @@ class Company {
      * @param string $companyName
      * @return Company
      */
-    public function setCompanyName($companyName)
-    {
+    public function setCompanyName($companyName) {
         $this->companyName = $companyName;
 
         return $this;
@@ -62,8 +68,7 @@ class Company {
      *
      * @return string 
      */
-    public function getCompanyName()
-    {
+    public function getCompanyName() {
         return $this->companyName;
     }
 
@@ -73,8 +78,7 @@ class Company {
      * @param string $companyDescription
      * @return Company
      */
-    public function setCompanyDescription($companyDescription)
-    {
+    public function setCompanyDescription($companyDescription) {
         $this->companyDescription = $companyDescription;
 
         return $this;
@@ -85,8 +89,54 @@ class Company {
      *
      * @return string 
      */
-    public function getCompanyDescription()
-    {
+    public function getCompanyDescription() {
         return $this->companyDescription;
+    }
+
+
+    /**
+     * Set region
+     *
+     * @param string $region
+     * @return Company
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region
+     *
+     * @return string 
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * Set province
+     *
+     * @param \Tkgl\CoreBundle\Entity\Province $province
+     * @return Company
+     */
+    public function setProvince(\Tkgl\CoreBundle\Entity\Province $province = null)
+    {
+        $this->province = $province;
+
+        return $this;
+    }
+
+    /**
+     * Get province
+     *
+     * @return \Tkgl\CoreBundle\Entity\Province 
+     */
+    public function getProvince()
+    {
+        return $this->province;
     }
 }

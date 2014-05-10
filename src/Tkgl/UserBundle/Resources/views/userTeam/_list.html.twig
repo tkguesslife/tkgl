@@ -1,19 +1,30 @@
-<table class="table table-striped table-hover" >    
-{% for userTeam in teams %}
-    <tr>
-        <td>
-            <a href="{{path('team_users',{teamId: userTeam.id}) }}" title="Edit team" class="ajaxLink">{{ userTeam}} </a><br>
-            <small>- {{userTeam.teamDescription}}<br>
-                <em>{{ userTeam.createdAt|date('M d Y g:i ')   }}</em>
-            </small>
-            <a href="{{path('team_edit',{teamId: userTeam.id})}}" title="Edit team" class="ajaxLink pull-right">Edit </a><br>
-        </td>
-        
-    </tr>
- {% else %}
-    <tr><td>
-      <p>No users found.</p>
-      </td>
-      </tr>
-{% endfor %}
-</table>
+<section class="panel">  
+    <header class="panel-heading">
+        <span class="pull-right"><a href="{{path('team_new')}}" title="Add new team" class="ajaxLink btn btn-default btn-small"> Add new</a></span>
+              User teams
+            </header>
+    <ul class="list-group list-group-flush m-t-n">
+        {% for userTeam in teams %}
+            <li class="list-group-item">
+                <div class="media">
+                    <div class="media-body">
+                        <a href="{{path('team_users',{teamId: userTeam.id}) }}" title="Edit team" class="ajaxLink">{{ userTeam}} </a><br>
+                        {{userTeam.teamDescription}}
+                        <small class="text-muted">
+                            <em>{{ userTeam.createdAt|date('M d Y g:i ')   }}</em></small>
+                        <a href="{{path('team_edit',{teamId: userTeam.id})}}" title="Edit team" class="ajaxLink pull-right">Edit </a><br>
+                    </div>
+                </div>
+            </li>
+            {% else %}
+                <li class="list-group-item">
+                    <div class="media">
+                        <div class="media-body">
+                            <p>No users found.</p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+    </ul>
+</section>
+

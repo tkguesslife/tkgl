@@ -1,9 +1,16 @@
+
 <section class="panel">
-<h4><i class="icon-edit"></i>Edit user</h4>
-<form class="form-horizontal" role="form" method="POST" {{ form_enctype(userForm) }}  action="{{path('user_edit', {intUserId: user.id})}}">
-{{ include(
+    <header class="panel-heading">
+        <span class="pull-right">
+            {#<a href="{{path('team_new')}}" title="Add new team" class="ajaxLink btn btn-default btn-small"> Add new</a>#}
+        </span>
+        <i class="icon-edit"></i>Edit user
+    </header>
+    <form class="form-horizontal" role="form" method="POST" {{ form_enctype(userForm) }}  action="{{path('user_edit', {intUserId: user.id})}}">
+        {{ include(
     'TkglUserBundle:user:_form.html.twig',
     { 'userForm': userForm, 'action': 'edit' }
 ) }}
-</form>
+    </form>
 </section>
+

@@ -7,6 +7,7 @@ use Tkgl\CoreBundle\Entity\AddressType;
 use Tkgl\CoreBundle\Entity\PhoneNumberType;
 use Tkgl\CoreBundle\Entity\EmailAddressType;
 use Tkgl\CoreBundle\Entity\Province;
+use Tkgl\CoreBundle\Entity\InstitutionType;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -84,6 +85,20 @@ class LoadLookupData extends AbstractFixture implements FixtureInterface, Contai
         $emailAddressType = new EmailAddressType();
         $emailAddressType->setName(EmailAddressType::OTHER);
         $manager->persist($emailAddressType);
+        
+        //Institutuion types
+        $newInstitutionType = new InstitutionType();
+        $newInstitutionType->setName(InstitutionType::COMPANY);
+        $manager->persist($newInstitutionType);
+        $newInstitutionType = new InstitutionType();
+        $newInstitutionType->setName(InstitutionType::CLINIC);
+        $manager->persist($newInstitutionType);
+        $newInstitutionType = new InstitutionType();
+        $newInstitutionType->setName(InstitutionType::HOSPITAL);
+        $manager->persist($newInstitutionType);
+        $newInstitutionType = new InstitutionType();
+        $newInstitutionType->setName(InstitutionType::OTHER);
+        $manager->persist($newInstitutionType);
 
         $arrProvince = array('Gauteng', 'Free state', 'Limpopo', 'Eastern cape', 'Northern cape', 'North west', 'Mpumalanga', 'Western cape', 'Kwa-Zulu natal');
         foreach ($arrProvince as $province) {

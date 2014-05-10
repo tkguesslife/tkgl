@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="emailAddressType", options={"comment" = " Home physical address, Work address, Postal Address"})
+ * @ORM\Table(name="email_address_type", options={"comment" = " Home physical address, Work address, Postal Address"})
  */
 class EmailAddressType {
   

@@ -23,7 +23,7 @@ class Address extends BaseAuditableEntity {
   
   /**
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\AddressType")
-   * @ORM\JoinColumn(name="addressTypeId", referencedColumnName="id")
+   * @ORM\JoinColumn(name="address_type_id", referencedColumnName="id")
    */
   protected $addressType;
 

@@ -1,0 +1,9 @@
+<section class="panel">
+    <header class="panel-heading"><i class="icon-edit"></i>Add new team</header>
+    <form class="form-horizontal" role="form" method="POST" {{ form_enctype(teamForm) }}  action="{{path('team_new')}}">
+        {{ include(
+    'TkglUserBundle:userTeam:_form.html.twig',
+    { 'teamForm': teamForm, 'action': 'create' }
+) }}
+    </form>
+</section>

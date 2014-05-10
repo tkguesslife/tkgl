@@ -1,0 +1,17 @@
+<h4>Personal details</h4>
+{{ form_row(dealForm.person.firstName) }}
+{{ form_row(dealForm.person.secondName) }}
+{{ form_row(dealForm.person.lastName) }}
+{{ form_row(dealForm.person.dateOfBirth) }}
+{{ form_row(dealForm.person.idnumber) }}
+{{ form_row(dealForm.person.passportNumber) }}
+<div class="line line-dashed m-t-large"></div>
+<h4>Contact details</h4>
+<div style="display:none"> {{ form_rest(dealForm) }}</div>
+<div class="control-group">
+    <div class="controls">                      
+        <button type="submit" class="btn btn-white">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</div>
+

@@ -1,32 +1,44 @@
-
-<table class="table table-striped b-t text-small">
+<section class="panel">
+    <header class="panel-heading"><span class="pull-right"><a href="{{path('user_new')}}" title="Add new user" class="ajaxLink pull-right btn btn-default btn-small"> Create user</a></h4></span>
+              Users
+            </header>
+    <div class="pull-out">
+<table class="table table-striped m-b-none text-small">
     <thead>
         <tr>
+            <th>Username</th>
+            <th>Email address</th>
             <th>Firstname</th>
             <th>Last name</th>
-            <th>Username</th>
-            <th>Status</th>
-            <th>Created At</th>
+            <th>Active</th>
+         {#   <th>Created</th>
+            <th>Updated</th>#}
         </tr>
     </thead>
     <tbody>
         {% for user in users %}
             <tr>
+                <td>                    
+                    <a href="{{path('user_edit',{intUserId: user.id})}}" title="Edit user" class="ajaxLink">{{ user.username}} </a><br>
+                </td>
+                <td>                    
+                    <a href="{{path('user_edit',{intUserId: user.id})}}" title="Edit user" class="ajaxLink">{{ user.email}} </a><br>
+                </td>
                 <td>
                     <a href="{{path('user_edit',{intUserId: user.id})}}" title="Edit user" class="ajaxLink">{{ user.person.firstname}} </a>
                 </td>
                 <td>
                     <a href="{{path('user_edit',{intUserId: user.id})}}" title="Edit user" class="ajaxLink">{{ user.person.lastname}} </a>
                 </td>
-                <td>                    
-                    <a href="{{path('user_edit',{intUserId: user.id})}}" title="Edit user" class="ajaxLink">{{ user.username}} </a><br>
-                </td>
                 <td>
                     {{ (user.enabled ? 'Yes' :  'No' )}} 
                 </td>
-                <td>
+                {#<td>
                     {{user.createdAt |date('Y-m-d h:i:s')}}
                 </td>
+                <td>
+                    {{user.updatedAt |date('Y-m-d h:i:s')}}
+                </td>#}
             </tr>
             {% else %}
                 <tr><td>
@@ -36,5 +48,5 @@
                 {% endfor %}
                 </tbody>
             </table>
-
-
+</div>
+</section>

@@ -7,7 +7,7 @@ use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Tkgl\UserBundle\Entity\Repository\UserTeamRepository")
- * @ORM\Table(name="userTeam", options={"comment" = "Stores user team desciption."})
+ * @ORM\Table(name="user_team", options={"comment" = "Stores user team desciption."})
  * @ORM\HasLifecycleCallbacks
  */
 class UserTeam  extends BaseAuditableEntity{
@@ -39,7 +39,7 @@ class UserTeam  extends BaseAuditableEntity{
   /**
    *
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Province")
-   * @ORM\JoinColumn(name="provinceId", referencedColumnName="id")
+   * @ORM\JoinColumn(name="province_id", referencedColumnName="id")
    */
   protected $province;
   
@@ -140,7 +140,7 @@ class UserTeam  extends BaseAuditableEntity{
      */
     public function addTeamUser(\Tkgl\UserBundle\Entity\User $teamUsers)
     {
-        $teamUsers->addUserTeam($this);
+//        $teamUsers->addUserTeam($this);
         $this->teamUsers[] = $teamUsers;
 
         return $this;

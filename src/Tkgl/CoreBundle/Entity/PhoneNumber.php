@@ -8,7 +8,7 @@ use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="phoneNumber", options={"comment" = "Stores phone numbers"})
+ * @ORM\Table(name="phone_number", options={"comment" = "Stores phone numbers"})
  * @ORM\HasLifecycleCallbacks
  */
 class PhoneNumber extends BaseAuditableEntity {
@@ -23,7 +23,7 @@ class PhoneNumber extends BaseAuditableEntity {
   
   /**
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\PhoneNumberType")
-   * @ORM\JoinColumn(name="phoneNumberTypeId", referencedColumnName="id")
+   * @ORM\JoinColumn(name="phone_number_type_id", referencedColumnName="id")
    */
   protected $phoneNumberType;
 

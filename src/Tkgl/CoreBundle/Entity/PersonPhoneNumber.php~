@@ -6,7 +6,7 @@ use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="personPhoneNumber")
+ * @ORM\Table(name="person_phone_number")
  */
 class PersonPhoneNumber extends BaseAuditableEntity  {
   
@@ -20,13 +20,13 @@ class PersonPhoneNumber extends BaseAuditableEntity  {
   
     /**
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Person", inversedBy="personPhoneNumbers")
-   * @ORM\JoinColumn(name="personId", referencedColumnName="id")     
+   * @ORM\JoinColumn(name="person_id", referencedColumnName="id")     
    */
   protected $person;
   
   /** 
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\PhoneNumber")
-   * @ORM\JoinColumn(name="phoneNumberId", referencedColumnName="id")   
+   * @ORM\JoinColumn(name="phone_number_id", referencedColumnName="id")   
    */
   protected $phoneNumber;
   

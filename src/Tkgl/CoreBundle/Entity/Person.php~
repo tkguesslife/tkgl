@@ -368,4 +368,27 @@ class Person extends BaseAuditableEntity {
 
 
 
+
+    /**
+     * Set dateOfBirth
+     *
+     * @param \DateTime $dateOfBirth
+     * @return Person
+     */
+    public function setDateOfBirth($dateOfBirth)
+    {
+        $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfBirth
+     *
+     * @return \DateTime 
+     */
+    public function getDateOfBirth()
+    {
+        return $this->dateOfBirth;
+    }
 }
