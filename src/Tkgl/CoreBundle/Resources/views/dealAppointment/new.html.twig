@@ -1,0 +1,23 @@
+{% extends "::first.html.twig" %}
+
+{% block body %}
+    <div class="clearfix">
+        <br>
+    </div>
+    <div class="row-fluid">
+        <div id="divTopMiddle" class="span12">
+
+            <section class="panel">                        
+                <header class="panel-heading"><i class="icon-edit"></i>Create appointment</header>
+                <form class="form-horizontal" role="form" method="POST" {{ form_enctype(dealAppointmentForm) }}  action="{{path('user_new')}}">
+
+                    {{ include(
+    'TkglCoreBundle:dealAppointment:_form.html.twig',
+    { 'dealAppointmentForm': dealAppointmentForm }
+) }}
+                </form>
+            </section>
+        </div>
+        
+    </div>
+{% endblock  %}

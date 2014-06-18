@@ -5,11 +5,11 @@ use Doctrine\ORM\EntityRepository;
 use Tkgl\CoreBundle\Entity\DealStateUpdate;
 
 /**
- * Description of DeaStateUpdateRepository
+ * Description of DealStateUpdateRepository
  *
  * @author Tiko Banyini <tiko@falcorp.co.za>
  */
-class DeaStateUpdateRepository extends EntityRepository {
+class DealStateUpdateRepository extends EntityRepository {
   
   
   /**

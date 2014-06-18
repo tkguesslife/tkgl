@@ -160,4 +160,37 @@ class Deal extends BaseAuditableEntity {
     {
         return $this->dealStateUpdates;
     }
+
+    /**
+     * Add dealAppointments
+     *
+     * @param \Tkgl\CoreBundle\Entity\DealAppointment $dealAppointments
+     * @return Deal
+     */
+    public function addDealAppointment(\Tkgl\CoreBundle\Entity\DealAppointment $dealAppointments)
+    {
+        $this->dealAppointments[] = $dealAppointments;
+
+        return $this;
+    }
+
+    /**
+     * Remove dealAppointments
+     *
+     * @param \Tkgl\CoreBundle\Entity\DealAppointment $dealAppointments
+     */
+    public function removeDealAppointment(\Tkgl\CoreBundle\Entity\DealAppointment $dealAppointments)
+    {
+        $this->dealAppointments->removeElement($dealAppointments);
+    }
+
+    /**
+     * Get dealAppointments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDealAppointments()
+    {
+        return $this->dealAppointments;
+    }
 }

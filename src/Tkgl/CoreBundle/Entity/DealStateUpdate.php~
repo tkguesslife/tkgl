@@ -5,7 +5,7 @@ namespace Tkgl\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Tkgl\CoreBundle\Entity\Repository\DeaStateUpdateRepository")
+ * @ORM\Entity(repositoryClass="Tkgl\CoreBundle\Entity\Repository\DealStateUpdateRepository")
  * @ORM\Table(name="deal_state_update")
  * @ORM\HasLifecycleCallbacks
  */

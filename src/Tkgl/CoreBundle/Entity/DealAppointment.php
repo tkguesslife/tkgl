@@ -4,7 +4,7 @@ namespace Tkgl\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tkgl\CoreBundle\Entity\Repository\DealAppointmentRepository")
  * @ORM\Table(name="deal_appointment")
  * @ORM\HasLifecycleCallbacks
  * @author Tiko Banyini <admin@tkbean.co.za>
@@ -25,7 +25,7 @@ class DealAppointment extends BaseAuditableEntity {
     protected $deal;
     
      /**
-     * @ORM\OneToOne(targetEntity="Tkgl\CoreBundle\Entity\Appointment")
+     * @ORM\OneToOne(targetEntity="Tkgl\CoreBundle\Entity\Appointment", cascade={"persist"})
      * @ORM\JoinColumn(name="appointment_id", referencedColumnName="id")   
      */
     protected $appointment;
