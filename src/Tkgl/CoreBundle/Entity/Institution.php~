@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="institution")
+ * @ORM\HasLifecycleCallbacks
  */
 class Institution extends BaseAuditableEntity {
 
@@ -35,7 +36,7 @@ class Institution extends BaseAuditableEntity {
    * @Assert\NotBlank()
    */
   protected $institutionDescription;
-  
+
   /**
    * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\InstitutionType")
    * @ORM\JoinColumn(name="institution_type_id", referencedColumnName="id")
@@ -54,129 +55,136 @@ class Institution extends BaseAuditableEntity {
    */
   protected $region;
 
+  /**
+   * @ORM\PrePersist
+   */
+  public function doStuffOnPrePersist() {
+    parent::doStuffOnPrePersist();
+  }
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+  /**
+   * @ORM\PreUpdate
+   */
+  public function doStuffOnPreUpdate() {
+    parent::doStuffOnPreUpdate();
+  }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Institution
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
+  public function __toString() {
+    return $this->getName();
+  }
 
-        return $this;
-    }
+  /**
+   * Get id
+   *
+   * @return integer 
+   */
+  public function getId() {
+    return $this->id;
+  }
 
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+  /**
+   * Set name
+   *
+   * @param string $name
+   * @return Institution
+   */
+  public function setName($name) {
+    $this->name = $name;
 
-    /**
-     * Set institutionDescription
-     *
-     * @param string $institutionDescription
-     * @return Institution
-     */
-    public function setInstitutionDescription($institutionDescription)
-    {
-        $this->institutionDescription = $institutionDescription;
+    return $this;
+  }
 
-        return $this;
-    }
+  /**
+   * Get name
+   *
+   * @return string 
+   */
+  public function getName() {
+    return $this->name;
+  }
 
-    /**
-     * Get institutionDescription
-     *
-     * @return string 
-     */
-    public function getInstitutionDescription()
-    {
-        return $this->institutionDescription;
-    }
+  /**
+   * Set institutionDescription
+   *
+   * @param string $institutionDescription
+   * @return Institution
+   */
+  public function setInstitutionDescription($institutionDescription) {
+    $this->institutionDescription = $institutionDescription;
 
-    /**
-     * Set region
-     *
-     * @param string $region
-     * @return Institution
-     */
-    public function setRegion($region)
-    {
-        $this->region = $region;
+    return $this;
+  }
 
-        return $this;
-    }
+  /**
+   * Get institutionDescription
+   *
+   * @return string 
+   */
+  public function getInstitutionDescription() {
+    return $this->institutionDescription;
+  }
 
-    /**
-     * Get region
-     *
-     * @return string 
-     */
-    public function getRegion()
-    {
-        return $this->region;
-    }
+  /**
+   * Set region
+   *
+   * @param string $region
+   * @return Institution
+   */
+  public function setRegion($region) {
+    $this->region = $region;
 
-    /**
-     * Set institutionType
-     *
-     * @param \Tkgl\CoreBundle\Entity\InstitutionType $institutionType
-     * @return Institution
-     */
-    public function setInstitutionType(\Tkgl\CoreBundle\Entity\InstitutionType $institutionType = null)
-    {
-        $this->institutionType = $institutionType;
+    return $this;
+  }
 
-        return $this;
-    }
+  /**
+   * Get region
+   *
+   * @return string 
+   */
+  public function getRegion() {
+    return $this->region;
+  }
 
-    /**
-     * Get institutionType
-     *
-     * @return \Tkgl\CoreBundle\Entity\InstitutionType 
-     */
-    public function getInstitutionType()
-    {
-        return $this->institutionType;
-    }
+  /**
+   * Set institutionType
+   *
+   * @param \Tkgl\CoreBundle\Entity\InstitutionType $institutionType
+   * @return Institution
+   */
+  public function setInstitutionType(\Tkgl\CoreBundle\Entity\InstitutionType $institutionType = null) {
+    $this->institutionType = $institutionType;
 
-    /**
-     * Set province
-     *
-     * @param \Tkgl\CoreBundle\Entity\Province $province
-     * @return Institution
-     */
-    public function setProvince(\Tkgl\CoreBundle\Entity\Province $province = null)
-    {
-        $this->province = $province;
+    return $this;
+  }
 
-        return $this;
-    }
+  /**
+   * Get institutionType
+   *
+   * @return \Tkgl\CoreBundle\Entity\InstitutionType 
+   */
+  public function getInstitutionType() {
+    return $this->institutionType;
+  }
 
-    /**
-     * Get province
-     *
-     * @return \Tkgl\CoreBundle\Entity\Province 
-     */
-    public function getProvince()
-    {
-        return $this->province;
-    }
+  /**
+   * Set province
+   *
+   * @param \Tkgl\CoreBundle\Entity\Province $province
+   * @return Institution
+   */
+  public function setProvince(\Tkgl\CoreBundle\Entity\Province $province = null) {
+    $this->province = $province;
+
+    return $this;
+  }
+
+  /**
+   * Get province
+   *
+   * @return \Tkgl\CoreBundle\Entity\Province 
+   */
+  public function getProvince() {
+    return $this->province;
+  }
+
 }

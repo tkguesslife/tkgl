@@ -1,0 +1,48 @@
+<?php
+namespace Tkgl\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="deal_appointment")
+ * @ORM\HasLifecycleCallbacks
+ * @author Tiko Banyini <admin@tkbean.co.za>
+ */
+class DealAppointment extends BaseAuditableEntity {
+  
+  /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Deal", inversedBy="dealAppointments")
+     * @ORM\JoinColumn(name="deal_id", referencedColumnName="id")     
+     */
+    protected $deal;
+    
+     /**
+     * @ORM\OneToOne(targetEntity="Tkgl\CoreBundle\Entity\Appointment")
+     * @ORM\JoinColumn(name="appointment_id", referencedColumnName="id")   
+     */
+    protected $appointment;
+
+
+  /**
+   * @ORM\PrePersist
+   */
+  public function doStuffOnPrePersist() {
+    parent::doStuffOnPrePersist();
+  }
+
+  /**
+   * @ORM\PreUpdate
+   */
+  public function doStuffOnPreUpdate() {
+    parent::doStuffOnPreUpdate();
+  }
+
+}

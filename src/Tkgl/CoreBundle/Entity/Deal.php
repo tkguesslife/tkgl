@@ -7,8 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="client")
+ * @ORM\Entity(repositoryClass="Tkgl\CoreBundle\Entity\Repository\DealRepository")
+ * @ORM\Table(name="deal")
  * @ORM\HasLifecycleCallbacks
  */
 class Deal extends BaseAuditableEntity {
@@ -21,7 +21,7 @@ class Deal extends BaseAuditableEntity {
     protected $id;
 
      /**
-   * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Person")
+   * @ORM\ManyToOne(targetEntity="Tkgl\CoreBundle\Entity\Person", cascade={"persist"})
    * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
    */
   protected $person;
@@ -34,8 +34,15 @@ class Deal extends BaseAuditableEntity {
   
     /**
    * @ORM\OneToMany(targetEntity="Tkgl\CoreBundle\Entity\DealStateUpdate", mappedBy="deal", cascade={"persist"})
+   * @ORM\OrderBy({"createdAt" = "DESC"}) 
    */
   protected $dealStateUpdates;
+  
+    /**
+   * @ORM\OneToMany(targetEntity="Tkgl\CoreBundle\Entity\DealAppointment", mappedBy="deal", cascade={"persist"})
+   * @ORM\OrderBy({"createdAt" = "DESC"}) 
+   */
+  protected $dealAppointments;
 
   public function __toString() {
       return $this->getPerson()->getFirstName().'  '.$this->$this->getPerson()->getLastName();
@@ -152,5 +159,38 @@ class Deal extends BaseAuditableEntity {
     public function getDealStateUpdates()
     {
         return $this->dealStateUpdates;
+    }
+
+    /**
+     * Add dealAppointments
+     *
+     * @param \Tkgl\CoreBundle\Entity\DealAppointment $dealAppointments
+     * @return Deal
+     */
+    public function addDealAppointment(\Tkgl\CoreBundle\Entity\DealAppointment $dealAppointments)
+    {
+        $this->dealAppointments[] = $dealAppointments;
+
+        return $this;
+    }
+
+    /**
+     * Remove dealAppointments
+     *
+     * @param \Tkgl\CoreBundle\Entity\DealAppointment $dealAppointments
+     */
+    public function removeDealAppointment(\Tkgl\CoreBundle\Entity\DealAppointment $dealAppointments)
+    {
+        $this->dealAppointments->removeElement($dealAppointments);
+    }
+
+    /**
+     * Get dealAppointments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDealAppointments()
+    {
+        return $this->dealAppointments;
     }
 }

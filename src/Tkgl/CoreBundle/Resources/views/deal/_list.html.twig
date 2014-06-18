@@ -1,0 +1,43 @@
+<section class="panel">
+    <header class="panel-heading"><span class="pull-right"><a href="{{path('deal_new')}}" title="Add new deal" class="ajaxLink pull-right btn btn-default btn-small"> Create deal</a></h4></span>
+              Deals
+            </header>
+    <div class="pull-out">
+<table class="table table-striped m-b-none text-small">
+    <thead>
+        <tr>
+            <th>Lastname</th>
+            <th>First name</th>
+            <th>Mobile</th>
+            <th>Email address</th>
+            <th>Created at</th>
+            <th>State</th>
+            <th>Actions</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for deal in deals %}
+            <tr>
+                <td>                    
+                    <a href="{{path('deal_interaction',{dealId: deal.id})}}" title="Edit details" class="ajaxLink">{{ deal.person.lastname}} </a><br>
+                </td>
+                <td>                    
+                    <a href="{{path('deal_interaction',{dealId: deal.id})}}" title="Edit details" class="ajaxLink">{{ deal.person.firstname}} </a><br>
+                </td>                
+                <td>{{deal.person.personPhoneNumbers|first}}</td>
+                <td>{{deal.person.personEmailAddresses|first}}</td>
+                <td>{{deal.createdAt|date('M d Y g:i ')}}</td>
+                <td>{{deal.dealStateUpdates|first}}</td>
+                <td><a href="{{path('deal_edit',{dealId: deal.id})}}" title="Edit details" class="ajaxLink">edit </a><br></td>
+            </tr>
+            {% else %}
+                <tr><td>
+                        <p>No deals found.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+</div>
+</section>

@@ -1,21 +1,14 @@
-{% extends "::first.html.twig" %}
-{% block body %}
-    <div class="row-fluid">
-        <div class="span6">
-            <section class="panel">
-                <section class="panel-heading">
-                    <h4><i class="icon-edit"></i>Add new deal</h4>
-                </section>
-                <section class="panel-content">
-                    <form class="form-horizontal" role="form" method="POST" {{ form_enctype(dealForm) }}  action="{{path('deal_new')}}">
-                        {{ include(
+
+<section class="panel">
+    <section class="panel-heading">
+        <h4><i class="icon-edit"></i>Add new deal</h4>
+    </section>
+    <section class="panel-content">
+        <form class="form-horizontal" role="form" method="POST" {{ form_enctype(dealForm) }}  action="{{path('deal_new')}}">
+            {{ include(
     'TkglCoreBundle:deal:_form.html.twig',
     { 'dealForm': dealForm, 'action': 'create' }
 ) }}
-                    </form>
-                </section>
-            </section>
-        </div>
-    </div>
-
-{% endblock body %}
+        </form>
+    </section>
+</section>

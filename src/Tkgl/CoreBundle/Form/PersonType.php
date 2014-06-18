@@ -20,13 +20,23 @@ class PersonType extends AbstractType {
                 ->add('secondName')
                 ->add('lastName')
                 ->add('companyName')
-                ->add('idnumber')
+                ->add('idnumber', null, array('label' => 'Id number'))
                 ->add('passportNumber')
                 ->add('dateOfBirth', 'datetime', array(
                     'required' => false,
                     'widget' => 'single_text',
-                    'attr' => array('class' => '',
+                    'attr' => array('class' => 'datepicker',
                         'data-format' => "yyyy-MM-dd")))
+                ->add('personEmailAddresses', 'collection', array(
+                    'error_bubbling' => true,
+                    'type' => new PersonEmailAddressType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,))
+                ->add('personPhoneNumbers', 'collection', array(
+                    'error_bubbling' => false,
+                    'type' => new PersonPhoneNumberType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,))
         ;
     }
 

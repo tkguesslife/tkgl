@@ -7938,7 +7938,7 @@ input[type="text"], select, textarea {
 .navbar-brand {
     float: left;
     text-align: center;
-    font-size: 28px;
+    font-size: 22px;
     line-height: 20px;
     font-family: "Times New Roman", Georgia, serif;
 /*    font-style: italic;*/
@@ -8092,7 +8092,7 @@ input[type="text"], select, textarea {
     border-width: 6px 0 6px 6px;
     ;
 }
-.arrow-top: before {
+.arrow-top:before {
     margin-top: -7px;
     top: 0;
     left: 6px;

@@ -5,7 +5,7 @@ namespace Tkgl\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tkgl\CoreBundle\Entity\Repository\DeaStateUpdateRepository")
  * @ORM\Table(name="deal_state_update")
  * @ORM\HasLifecycleCallbacks
  */
@@ -44,10 +44,11 @@ class DealStateUpdate extends BaseAuditableEntity {
         parent::doStuffOnPreUpdate();
     }
 
-    
+    public function __toString() {
+      return $this->getDealState()->getName();
+    }
 
-
-    /**
+        /**
      * Get id
      *
      * @return integer 

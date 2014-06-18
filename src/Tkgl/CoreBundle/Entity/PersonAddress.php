@@ -6,8 +6,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="person_address")
+ * @ORM\HasLifecycleCallbacks
  */
-class PersonAddress {
+class PersonAddress extends BaseAuditableEntity {
   
   
     /**
@@ -86,5 +87,21 @@ class PersonAddress {
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function doStuffOnPrePersist()
+    {
+        // Add your code here
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function doStuffOnPreUpdate()
+    {
+        // Add your code here
     }
 }

@@ -67,11 +67,19 @@ class Person extends BaseAuditableEntity {
   
   /**
    * @ORM\OneToMany(targetEntity="Tkgl\CoreBundle\Entity\PersonAddress", mappedBy="person", cascade={"persist"})
+   * @ORM\OrderBy({"createdAt" = "DESC"})
    */
   protected $personAddress;
   
   /**
+   * @ORM\OneToMany(targetEntity="Tkgl\CoreBundle\Entity\PersonEmailAddress", mappedBy="person", cascade={"persist"})
+   * @ORM\OrderBy({"createdAt" = "DESC"})
+   */
+  protected $personEmailAddresses;
+  
+  /**
    * @ORM\OneToMany(targetEntity="Tkgl\CoreBundle\Entity\PersonPhoneNumber", mappedBy="person", cascade={"persist"})
+   * @ORM\OrderBy({"createdAt" = "DESC"})
    */
   protected $personPhoneNumbers;
 
@@ -97,14 +105,7 @@ class Person extends BaseAuditableEntity {
         parent::doStuffOnPreUpdate();
     }
     
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->personAddress = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->personPhoneNumbers = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
 
     /**
      * Get id
@@ -391,4 +392,48 @@ class Person extends BaseAuditableEntity {
     {
         return $this->dateOfBirth;
     }
+  
+
+    /**
+     * Add personEmailAddresses
+     *
+     * @param \Tkgl\CoreBundle\Entity\PersonEmailAddress $personEmailAddresses
+     * @return Person
+     */
+    public function addPersonEmailAddress(\Tkgl\CoreBundle\Entity\PersonEmailAddress $personEmailAddresses)
+    {
+        $this->personEmailAddresses[] = $personEmailAddresses;
+
+        return $this;
+    }
+
+    /**
+     * Remove personEmailAddresses
+     *
+     * @param \Tkgl\CoreBundle\Entity\PersonEmailAddress $personEmailAddresses
+     */
+    public function removePersonEmailAddress(\Tkgl\CoreBundle\Entity\PersonEmailAddress $personEmailAddresses)
+    {
+        $this->personEmailAddresses->removeElement($personEmailAddresses);
+    }
+
+    /**
+     * Get personEmailAddresses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPersonEmailAddresses()
+    {
+        return $this->personEmailAddresses;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->personAddress = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->personEmailAddresses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->personPhoneNumbers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }

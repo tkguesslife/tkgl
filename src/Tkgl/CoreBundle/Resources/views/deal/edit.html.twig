@@ -1,0 +1,14 @@
+
+<section class="panel">
+    <section class="panel-heading">
+        <h4><i class="icon-edit"></i>Edit deal</h4>
+    </section>
+    <section class="panel-content">
+        <form class="form-horizontal" role="form" method="POST" {{ form_enctype(dealForm) }}  action="{{path('deal_edit', {dealId: deal.id})}}">
+            {{ include(
+    'TkglCoreBundle:deal:_form.html.twig',
+    { 'dealForm': dealForm, 'action': 'edit' }
+) }}
+        </form>
+    </section>
+</section>

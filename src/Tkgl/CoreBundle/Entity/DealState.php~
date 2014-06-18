@@ -3,14 +3,15 @@
 namespace Tkgl\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Tkgl\CoreBundle\Entity\BaseAuditableEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tkgl\CoreBundle\Entity\Repository\DealStateRepository")
  * @ORM\Table(name="deal_state")
+ * @ORM\HasLifecycleCallbacks
  */
-class DealState {
-  
-  
+class DealState extends BaseAuditableEntity {
+
   CONST NEW_LEAD_STATE = 'New lead';
   CONST PROSPECT_STATE = 'Prospect';
   CONST NTU_STATE = 'NTU';
@@ -28,44 +29,52 @@ class DealState {
    */
   protected $name;
 
-  
-  
-   public function __toString(){
-     return $this->getName();
-   }
-  
-   
+  public function __toString() {
+    return $this->getName();
+  }
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+  /**
+   * @ORM\PrePersist
+   */
+  public function doStuffOnPrePersist() {
+    parent::doStuffOnPrePersist();
+  }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return DealState
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    
-        return $this;
-    }
+  /**
+   * @ORM\PreUpdate
+   */
+  public function doStuffOnPreUpdate() {
+    parent::doStuffOnPreUpdate();
+  }
 
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+  /**
+   * Get id
+   *
+   * @return integer 
+   */
+  public function getId() {
+    return $this->id;
+  }
+
+  /**
+   * Set name
+   *
+   * @param string $name
+   * @return DealState
+   */
+  public function setName($name) {
+    $this->name = $name;
+
+    return $this;
+  }
+
+  /**
+   * Get name
+   *
+   * @return string 
+   */
+  public function getName() {
+    return $this->name;
+  }
+
 }
