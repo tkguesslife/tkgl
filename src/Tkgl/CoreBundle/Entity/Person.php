@@ -32,6 +32,7 @@ class Person extends BaseAuditableEntity {
 
   /**
    * @ORM\Column(type="string", length=100, nullable=true)   
+   * @Assert\NotBlank(message="Required.")
    */
   protected $firstName;
 
@@ -42,6 +43,7 @@ class Person extends BaseAuditableEntity {
 
   /**
    * @ORM\Column(type="string", length=100, nullable=true)   
+   * @Assert\NotBlank(message="Required.")
    */
   protected $lastName;
 

@@ -26,6 +26,7 @@ class DealAppointmentType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Tkgl\CoreBundle\Entity\DealAppointment'
+            ,'cascade_validation' => true,
         ));
     }
 

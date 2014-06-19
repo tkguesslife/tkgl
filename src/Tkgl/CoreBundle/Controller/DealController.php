@@ -129,7 +129,7 @@ class DealController extends Controller {
    *
    * @Route("/{dealId}/interaction", name="deal_interaction")
    * @Method("GET")
-   * @Template("TkglCoreBundle:deal:_interaction.html.twig")
+   * @Template("TkglCoreBundle:deal:interaction.html.twig")
    * @author Tiko Banyini <admin@tkbean.co.za>
    */
   public function interaction($dealId){

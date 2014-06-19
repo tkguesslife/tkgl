@@ -1,13 +1,16 @@
-
+<h4>{{deal.person}}  ({{deal.dealStateUpdates|first}})</h4>
+{#<span class="pull-right"> <a href="{{path('deal_edit',{dealId:deal.id})}}" title="Edit details" class="ajaxLink">Edit</a></span>#}
 <section class="panel text-left">
-    <header class="panel-heading">{{deal.person}}  ({{deal.dealStateUpdates|first}})
-    <span class="pull-right"> <a href="{{path('deal_edit',{dealId:deal.id})}}" title="Edit details" class="ajaxLink">Edit</a></span>
-    </header>
-    {% for email in deal.person.personEmailAddresses %}
-        <h5>{{email.emailAddressType}} email address: {{email.emailAddress}} </h5> 
-    {% endfor%}
-    {% for tel in deal.person.personPhoneNumbers  %}
-        <h5>{{tel.phoneNumberType}}: {{tel.phoneNumber}} </h5> 
-    {% endfor%}
     
+    <dl class="dl-horizontal">
+        {% for email in deal.person.personEmailAddresses %}
+            <dt>{{email.emailAddressType}} email address</dt> <dd>{{email.emailAddress}}</dd>
+        {% endfor%}
+        {% for tel in deal.person.personPhoneNumbers  %}
+            <dt>{{tel.phoneNumberType}} phone number </dt> <dd> {{tel.phoneNumber}} </dd> 
+        {% endfor%}
+        <dt>Created at</dt> <dd>{{deal.createdAt|date('M d Y g:i ')}}</dd>
+        <dt>Created by</dt> <dd>{{deal.createdBy}}</dd>
+
+</dl>    
 </section>

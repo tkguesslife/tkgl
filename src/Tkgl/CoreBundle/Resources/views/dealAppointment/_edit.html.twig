@@ -1,0 +1,7 @@
+<form class="form-horizontal" role="form" method="POST" {{ form_enctype(dealAppointmentForm) }}  action="{{path('deal_appointment_edit', {dealAppointmentId: dealAppointment.id})}}">
+
+    {{ include(
+    'TkglCoreBundle:dealAppointment:_form.html.twig',
+    { 'dealAppointmentForm': dealAppointmentForm }
+) }}
+</form>

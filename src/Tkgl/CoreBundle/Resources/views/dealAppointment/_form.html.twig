@@ -1,20 +1,37 @@
-<div class="row">
-    <div class="span5 offset1">
 
-        {{ form_row(dealAppointmentForm.appointment.attendees) }}
-        {{ form_row(dealAppointmentForm.appointment.subject) }}
-        {{ form_row(dealAppointmentForm.appointment.location) }}
-        {{ form_row(dealAppointmentForm.appointment.appointmentDescription) }}
-        {{ form_row(dealAppointmentForm.appointment.startTime) }}
-        {{ form_row(dealAppointmentForm.appointment.duration) }}
-    </div>
-    <div class="span5">
-    </div>
-</div> 
+
+{{ form_row(dealAppointmentForm.appointment.attendees) }}
+{{ form_row(dealAppointmentForm.appointment.subject) }}
+{{ form_row(dealAppointmentForm.appointment.location) }}
+{{ form_row(dealAppointmentForm.appointment.appointmentDescription) }}
+<div class="input-append date dateTimePicker">
+    {{ form_row(dealAppointmentForm.appointment.startTime) }}
+</div>
+{{ form_row(dealAppointmentForm.appointment.duration) }}
+
+
 <div style="display:none"> {{ form_rest(dealAppointmentForm) }}</div>
 <div class="control-group">
     <div class="controls">                      
-        <a class="btn btn-white" href="{{path('user_manage')}}">Cancel</a>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <a class="btn btn-white ajaxLinkComp" href="{{path('deal_appointment_list', {dealId: deal.id})}}" >Cancel</a>
+        <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </div>
+<script src="{{ asset('/js/bootstrap-datetimepicker.min.js') }}"></script>          
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $("<span class='add-on'><i data-time-icon='icon-time' data-date-icon='icon-calendar'> </i></span>").appendTo('.dateTimePicker .control-group .controls');
+
+    });
+
+
+
+    $('.dateTimePicker').datetimepicker({
+        language: 'en',
+        pick12HourFormat: false,
+        pickSeconds: false,
+    });
+
+    //$('.attendees').tagit();
+</script>

@@ -3,13 +3,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <head>
         <meta charset="UTF-8">
-        <title>TKGL {% block title %}{% endblock %}</title>
+        <title>TKGL {% block title %} | Database{% endblock %}</title>
         <meta name="author" content="Tiko Banyini">
         <meta name="description" content="Private company business information.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" type="text/css" href="{{ asset('app-css.v1.css')}}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('css/smoothness/jquery-ui-1.10.4.custom.css')}}" />
+        <link rel='stylesheet'  href="{{ asset('/css/bootstrap-datetimepicker.min.css') }}"  />
     {% block stylesheets %}{% endblock %}
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-1.10.2.custom.js') }}"></script>
@@ -19,9 +20,9 @@
         <script src="{{ asset('js/excanvas.js')}} "></script>
       <![endif]-->
 </head>
-<body>
+<body class="navbar-fixed">
     <!-- header -->
-    <header id="header" class="navbar navbar-sm bg bg-black">
+    <header id="header" class="navbar navbar-sm bg bg-black">        
         <ul class="nav navbawr-nav pull-right">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="dropdown">
@@ -42,7 +43,11 @@
                 <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
                 {% endif %}
         </ul>
-        <a class="navbar-brand" href="#">| Men's Health </a><br>
+        <form data-target=".nav-primary" data-toggle="shift:appendTo" action="" class="navbar-form pull-right shift">
+                <i class="icon-search text-muted"></i>
+                <input type="text" placeholder="Search" class="input-small">
+            </form>
+        <a class="navbar-brand" href="#">| The Database </a><br>
         <button type="button" class="btn btn-link nav-toggle pull-left hidden-desktop" data-toggle="class:show" data-target="#nav">
             <i class="icon-reorder icon-xlarge text-default"></i>
         </button>
@@ -166,6 +171,7 @@
         </div>
     </footer><!-- / footer --><!-- Bootstrap --><!-- app --><!-- Sparkline Chart --><!-- Easy Pie Chart -->
     {#<script src="{{ asset('app-js.v1.js')}}"></script>#} <!-- causes jquery date picker bug -->
+    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>            
     <script type="text/javascript">
         $('body').on('focus', ".datepicker", function() {
             $(this).datepicker({dateFormat: 'yy-mm-dd', changeYear: true

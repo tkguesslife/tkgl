@@ -1,0 +1,104 @@
+{% extends "::first.html.twig" %}
+
+{% block body %}
+    <div class="clearfix">
+        <br>
+    </div>
+    <div class="row-fluid">
+        <div id="divTopMiddle" class="span12">
+
+            <div class="span6">
+                {{ include(
+    'TkglCoreBundle:deal:_deal.html.twig',
+    { 'deal': deal }
+) }}
+            </div>
+
+            <div class="span6">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <a href="{{path('deal_appointment_new', {dealId: deal.id})}}" title="Add new deal" class="ajaxLinkComp pull-right btn btn-primary btn-small"> Create new</a>
+                        Appointments
+                    </header>
+                    <section class="panel-content appointments">
+                        loading....
+                    </section> 
+                </section>
+            </div>
+
+            <script type="text/javascript">
+
+
+                $(document).ready(function() {
+
+                    loadDealAppointments();
+
+                    $(".ajaxLinkComp").live('click', function(e) {
+                        e.preventDefault();
+                        var contentPanel = $(this).closest('.panel').children('.panel-content');
+
+                        $.ajax({
+                            type: 'GET',
+                            url: this.href,
+                            data: {},
+                            success: function(data) {
+                                $(contentPanel).html(data);
+                            }
+                        });
+
+                    });
+
+                    var submittedForm = null;
+                    $('form').live('submit', function(e) {
+                        e.preventDefault();
+                        submittedForm = $(this);
+                        var contentPanel = $(this).closest('.panel').children('.panel-content');
+                        postForm(submittedForm, function(response) {
+                                if(response.success){
+                                    switch(response.action){
+                                        case 'saveAppointment' :
+                                        case 'editAppointment' :
+                                            loadDealAppointments();
+                                            break;
+                                    }
+                                }else{
+                                    $(contentPanel).html(response);
+                                    
+                                }
+
+                        });
+                    });
+
+
+
+                });
+
+                function postForm($form, callback) {
+                    // Get all form values    
+                    var values = $form.serialize();
+
+                    // Throw the form values to the server!    
+                    $.ajax({
+                        type: $form.attr('method'),
+                        url: $form.attr('action'),
+                        data: values,
+                        success: function(data) {
+                            callback(data);
+                        }
+                    });
+                }
+
+                function loadDealAppointments() {
+
+                    $.ajax({
+                        type: 'GET',
+                        url: "{{ path('deal_appointment_list', {dealId: deal.id}) }}",
+                        data: {},
+                        success: function(data) {
+                            $('.appointments').html(data);
+                        }
+                    });
+                }
+            </script>                      
+
+        {% endblock %}

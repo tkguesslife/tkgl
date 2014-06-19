@@ -1,7 +1,7 @@
 
 <section class="panel">
     <section class="panel-heading">
-        <h4><i class="icon-edit"></i>Edit deal</h4>
+        <i class="icon-edit"></i>Edit deal
     </section>
     <section class="panel-content">
         <form class="form-horizontal" role="form" method="POST" {{ form_enctype(dealForm) }}  action="{{path('deal_edit', {dealId: deal.id})}}">

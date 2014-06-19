@@ -1,8 +1,8 @@
 
 <section class="panel">
-    <section class="panel-heading">
-        <h4><i class="icon-edit"></i>Add new deal</h4>
-    </section>
+    <header class="panel-heading">
+        <i class="icon-edit"></i>Add new deal
+    </header>
     <section class="panel-content">
         <form class="form-horizontal" role="form" method="POST" {{ form_enctype(dealForm) }}  action="{{path('deal_new')}}">
             {{ include(

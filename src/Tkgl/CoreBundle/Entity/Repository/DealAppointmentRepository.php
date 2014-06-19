@@ -27,11 +27,11 @@ class DealAppointmentRepository extends EntityRepository {
    */
   public function createNew($objOwner){
     $newDealAppointment = new DealAppointment();
-//    $newDealAppointment->setCreatedBy($objOwner);
+    $newDealAppointment->setCreatedBy($objOwner);
     
     $newAppointment = new Appointment();
     $newAppointment->setCreatedBy($objOwner);
-//    $newDealAppointment->setAppointment($newAppointment);
+    $newDealAppointment->setAppointment($newAppointment);
     
     return $newDealAppointment;
     

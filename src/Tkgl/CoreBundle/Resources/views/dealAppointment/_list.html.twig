@@ -1,0 +1,24 @@
+
+<ul class="list-group list-group-flush m-t-n">
+        {% for dealAppointment in dealAppointments %}
+            <li class="list-group-item">
+                <div class="media">
+                    <div class="media-body">
+                        {{ dealAppointment.appointment.startTime|date('M d Y g:i ')}} <a href="{{path('deal_appointment_edit', {dealAppointmentId: dealAppointment.id})}}" title="Edit" class="ajaxLinkComp">{{ dealAppointment.appointment.subject}} </a><br>
+                        {{dealAppointment.appointment.appointmentDescription}}
+                        <small class="text-muted">
+                            <em>{{ dealAppointment.createdAt|date('M d Y g:i ')   }}</em></small>
+                        {#<a href="{{path('team_edit',{teamId: userTeam.id})}}" title="Edit team" class="ajaxLink pull-right">Edit </a><br>#}
+                    </div>
+                </div>
+            </li>
+            {% else %}
+                <li class="list-group-item">
+                    <div class="media">
+                        <div class="media-body">
+                            <p>No appointments found.</p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+    </ul>
